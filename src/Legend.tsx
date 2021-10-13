@@ -11,16 +11,17 @@ export interface LegendProps extends RectProps {
   topPad: number;
   space: number;
 }
+
 export default function Legend({
-  panelColors,
-  leftPad = 0,
-  topPad = 0,
-  space = 0,
-  rectSize = 0,
-  legendCellSize = 0,
-  legendRender,
-  ...props
-}: LegendProps) {
+                                 panelColors,
+                                 leftPad = 0,
+                                 topPad = 0,
+                                 space = 0,
+                                 rectSize = 0,
+                                 legendCellSize = 0,
+                                 legendRender,
+                                 ...props
+                               }: LegendProps) {
   let size = legendCellSize || rectSize;
   return useMemo(
     () => (
@@ -29,15 +30,19 @@ export default function Legend({
           const rectProps = {
             ...props,
             key,
-            x: (size + 1) * key + leftPad,
-            y: topPad + rectSize * 8 + 6,
+            // x: (size + 1) * key + leftPad,
+            // y: topPad + rectSize * 8 + 6,
             fill: panelColors![Number(num)],
             width: size,
             height: size,
           };
           if (legendRender) return legendRender(rectProps);
-          return <Rect {...rectProps} />;
-        })}
+          return <svg width={size} height={size} style={{marginRight: '4px', borderRadius: 0}}>
+            <Rect {...rectProps} />
+          </svg>;
+
+        })
+        }
       </Fragment>
     ),
     [panelColors, props, size, leftPad, topPad, rectSize, legendRender],

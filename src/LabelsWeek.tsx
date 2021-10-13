@@ -7,6 +7,7 @@ export interface LablesWeekProps extends React.SVGProps<SVGTextElement> {
   space: SVGProps['space'];
   topPad: number;
 }
+
 export const LabelsWeek = ({ weekLabels = [], rectSize = 0, topPad = 0, space = 0 }: LablesWeekProps) =>
   useMemo(
     () => (
@@ -14,7 +15,7 @@ export const LabelsWeek = ({ weekLabels = [], rectSize = 0, topPad = 0, space = 
         {[...Array(7)].map((_, idx) => {
           if (weekLabels && weekLabels[idx]) {
             return (
-              <text key={idx} x={15} y={topPad} dy={(idx + 1) * (rectSize + space) - 5}>
+              <text key={idx} x={40} y={topPad + 15} dy={(idx + 1) * (rectSize + space) - 5}>
                 {weekLabels[idx]}
               </text>
             );

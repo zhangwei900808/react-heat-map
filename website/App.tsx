@@ -31,10 +31,10 @@ const App: React.FC = () => {
         </p>
         <Example />
       </header>
-      <MarkdownPreview
-        source={MDStr}
-        className={styles.content}
-        components={{
+      {/*<MarkdownPreview*/}
+      {/*  source={MDStr}*/}
+      {/*  className={styles.content}*/}
+      {/*  components={{*/}
           /**
            * bgWhite 设置代码预览背景白色，否则为格子背景。
            * noCode 不显示代码编辑器。
@@ -42,26 +42,26 @@ const App: React.FC = () => {
            * noScroll 预览区域不显示滚动条。
            * codePen 显示 Codepen 按钮，要特别注意 包导入的问题，实例中的 import 主要用于 Codepen 使用。
            */
-           code: ({ inline, node, ...props }) => {
-            const { noPreview, noScroll, bgWhite, noCode, codeSandbox, codePen } = props as any;
-            if (inline) {
-              return <code {...props} />;
-            }
-            const config = { noPreview, noScroll, bgWhite, noCode, codeSandbox, codePen } as any;
-            if (Object.keys(config).filter((name) => config[name] !== undefined).length === 0) {
-              return <code {...props} />;
-            }
-            return (
-              <Code
-                code={getCodeStr(node.children)}
-                dependencies={{ useRef, useEffect, useState, HeatMap, Tooltip }}
-                language={(props.className || '').replace(/^language-/, '')}
-                {...{ noPreview, noScroll, bgWhite, noCode, codeSandbox, codePen }}
-              />
-            );
-          },
-        }}
-      />
+      {/*     code: ({ inline, node, ...props }) => {*/}
+      {/*      const { noPreview, noScroll, bgWhite, noCode, codeSandbox, codePen } = props as any;*/}
+      {/*      if (inline) {*/}
+      {/*        return <code {...props} />;*/}
+      {/*      }*/}
+      {/*      const config = { noPreview, noScroll, bgWhite, noCode, codeSandbox, codePen } as any;*/}
+      {/*      if (Object.keys(config).filter((name) => config[name] !== undefined).length === 0) {*/}
+      {/*        return <code {...props} />;*/}
+      {/*      }*/}
+      {/*      return (*/}
+      {/*        <Code*/}
+      {/*          code={getCodeStr(node.children)}*/}
+      {/*          dependencies={{ useRef, useEffect, useState, HeatMap, Tooltip }}*/}
+      {/*          language={(props.className || '').replace(/^language-/, '')}*/}
+      {/*          {...{ noPreview, noScroll, bgWhite, noCode, codeSandbox, codePen }}*/}
+      {/*        />*/}
+      {/*      );*/}
+      {/*    },*/}
+      {/*  }}*/}
+      {/*/>*/}
     </div>
   );
 };

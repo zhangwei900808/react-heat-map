@@ -67,37 +67,39 @@ export default function Example() {
   const [enableDark, setEnableDark] = useState(false);
   const [enableCircle, setEnableCircle] = useState(false);
   const [rectSize, setRectSize] = useState(11);
+  const [space, setSpace] = useState(4);
   const [legendCellSize, setLegendCellSize] = useState<number | undefined>();
   const [enableWeekLabels, setEnableWeekLabels] = useState<false | undefined | string[]>(undefined);
   const [enableMonthLabels, setEnableMonthLabels] = useState<false | undefined | string[]>(undefined);
   return (
     <Fragment>
-      <div className={styles.example} style={{ width: 663 }}>
+      <div className={styles.example} style={{ width: 1000 }}>
         <HeatMap
           style={{
             backgroundColor: enableDark ? '#000' : '#fff',
             color: enableDark ? '#888' : '#000',
           }}
           panelColors={enableDark ? darkColor : undefined}
-          width={663}
+          width={950}
+          space={space}
           rectSize={rectSize}
           legendCellSize={legendCellSize}
           weekLabels={enableWeekLabels}
           monthLabels={enableMonthLabels}
-          startDate={new Date('2016/01/01')}
-          endDate={enableEndDate ? new Date('2016/6/01') : undefined}
-          value={value}
+          startDate={new Date('2021/01/01')}
+          endDate={new Date('2021/12/31')}
+          // value={value}
           rectProps={{
             rx: !enableCircle ? 0 : 5,
             onClick: (e) => {
               setSelectDate((e.target as any).dataset.date);
             },
           }}
-          legendRender={(props) => <rect {...props} rx={!enableCircle ? 0 : 5} />}
+          // legendRender={(props) => <rect {...props} rx={!enableCircle ? 0 : 5} />}
           rectRender={(props, data) => {
             // if (!data.count) return <rect {...props} />;
             return (
-              <Tooltip key={props.key} placement="top" content={`count: ${data.count || 0}`}>
+              <Tooltip key={props.key} placement='top' content={`count: ${data.count || 0}，${data.date}`}>
                 <rect {...props} />
               </Tooltip>
             );
@@ -134,23 +136,23 @@ export default function Example() {
           <span>{selectDate}</span>
         </div>
         <label>
-          <input type="checkbox" checked={enableEndDate} onChange={(e) => setEnableEndDate(e.target.checked)} />
+          <input type='checkbox' checked={enableEndDate} onChange={(e) => setEnableEndDate(e.target.checked)} />
           endDate = {enableEndDate ? '2016/6/01' : 'undefined'}
         </label>
         <label>
-          <input type="checkbox" checked={enableDark} onChange={(e) => setEnableDark(e.target.checked)} />
+          <input type='checkbox' checked={enableDark} onChange={(e) => setEnableDark(e.target.checked)} />
           {enableDark ? 'Dark' : 'Light'}
         </label>
 
         <label>
-          <input type="checkbox" checked={enableCircle} onChange={(e) => setEnableCircle(e.target.checked)} />
+          <input type='checkbox' checked={enableCircle} onChange={(e) => setEnableCircle(e.target.checked)} />
           {enableCircle ? 'Circle' : 'Rect'}
         </label>
 
         <label style={{ marginTop: 15 }}>
           <input
-            type="radio"
-            name="weekLabels"
+            type='radio'
+            name='weekLabels'
             checked={enableWeekLabels === undefined}
             onChange={(e) => setEnableWeekLabels(undefined)}
           />
@@ -158,8 +160,8 @@ export default function Example() {
         </label>
         <label>
           <input
-            type="radio"
-            name="weekLabels"
+            type='radio'
+            name='weekLabels'
             checked={enableWeekLabels === false}
             onChange={(e) => setEnableWeekLabels(false)}
           />
@@ -167,8 +169,8 @@ export default function Example() {
         </label>
         <label>
           <input
-            type="radio"
-            name="weekLabels"
+            type='radio'
+            name='weekLabels'
             checked={Array.isArray(enableWeekLabels)}
             onChange={(e) => setEnableWeekLabels(['日', '一', '', '三', '', '五', '六'])}
           />
@@ -177,8 +179,8 @@ export default function Example() {
 
         <label style={{ marginTop: 15 }}>
           <input
-            type="radio"
-            name="monthLabels"
+            type='radio'
+            name='monthLabels'
             checked={enableMonthLabels === undefined}
             onChange={(e) => setEnableMonthLabels(undefined)}
           />
@@ -187,8 +189,8 @@ export default function Example() {
         </label>
         <label>
           <input
-            type="radio"
-            name="monthLabels"
+            type='radio'
+            name='monthLabels'
             checked={enableMonthLabels === false}
             onChange={(e) => setEnableMonthLabels(false)}
           />
@@ -196,8 +198,8 @@ export default function Example() {
         </label>
         <label>
           <input
-            type="radio"
-            name="monthLabels"
+            type='radio'
+            name='monthLabels'
             checked={Array.isArray(enableMonthLabels)}
             onChange={(e) =>
               setEnableMonthLabels(['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'])
@@ -208,15 +210,15 @@ export default function Example() {
 
         <div style={{ display: 'flex', marginTop: 10 }}>
           <label>
-            <input type="radio" name="rectSize" checked={rectSize === 11} onChange={(e) => setRectSize(11)} />
+            <input type='radio' name='rectSize' checked={rectSize === 11} onChange={(e) => setRectSize(11)} />
             rectSize = 11
           </label>
           <label>
-            <input type="radio" name="rectSize" checked={rectSize === 12} onChange={(e) => setRectSize(12)} />
+            <input type='radio' name='rectSize' checked={rectSize === 12} onChange={(e) => setRectSize(12)} />
             rectSize = 12
           </label>
           <label>
-            <input type="radio" name="rectSize" checked={rectSize === 14} onChange={(e) => setRectSize(14)} />
+            <input type='radio' name='rectSize' checked={rectSize === 14} onChange={(e) => setRectSize(14)} />
             rectSize = 14
           </label>
         </div>
@@ -224,7 +226,7 @@ export default function Example() {
         <div style={{ display: 'flex', marginTop: 16 }}>
           <label>
             <input
-              type="number"
+              type='number'
               value={legendCellSize || ''}
               onChange={(e) => setLegendCellSize(Number(e.target.value) || 0)}
             />
